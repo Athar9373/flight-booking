@@ -11,7 +11,7 @@ import { HlmButtonImports } from '@spartan-ng/helm/button';
       variant="outline"
       size="lg"
       (click)="notifyParent()"
-      class="text-white hover:text-white active:scale-[0.9]! text-[12px] flex justify-center items-center cursor-pointer gap-1 px-4 py-2.5 border-0 font-bold rounded-xl bg-linear-to-r from-blue-400 to-blue-600 hover:opacity-80 transition-opacity"
+      class="text-white p-4! hover:text-white active:scale-[0.9]! text-[12px] flex justify-center items-center cursor-pointer gap-1 px-4 py-2.5 border-0 font-bold rounded-xl bg-linear-to-r from-blue-400 to-blue-600 hover:opacity-80 transition-opacity"
     >
       {{ buttonName() }}
     </button>
