@@ -1,0 +1,67 @@
+<div class="relative max-w-6xl mx-auto px-4 pt-32 pb-32">
+  <!-- MAIN SEARCH CARD -->
+  <div
+    class="relative bg-white rounded-xl shadow-2xl pt-16 pb-12 px-6 lg:px-5 mt-6"
+    (click)="$event.stopPropagation()"
+  >
+    <app-trip-type></app-trip-type>
+
+    <div
+      class="flex grow-0 border border-slate-300 rounded-2xl mt-6 divide-y lg:divide-y-0 lg:divide-x divide-slate-300 relative"
+    >
+      <div
+        class="w-99 grid grid-cols-2 border-r border-slate-300 divide-y lg:divide-y-0 lg:divide-x divide-slate-300 relative"
+      >
+        <!-- FROM -->
+        <city-popover
+          [city]="fromCity()"
+          label="FROM"
+          (cityChange)="onFromCityChange($event)"
+          class="w-full pr-1 hover:bg-blue-100/70 transition-colors duration-75"
+        />
+
+        <!-- SWAP -->
+        <button
+          type="button"
+          (click)="swapCities()"
+          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:flex w-7 h-7 bg-white border rounded-full shadow-md border-slate-200 items-center justify-center text-blue-600 hover:bg-slate-100 cursor-pointer"
+          aria-label="Swap departure and destination"
+        >
+          <ng-icon name="lucideArrowLeftRight" size="14" />
+        </button>
+
+        <!-- TO -->
+        <city-popover
+          [city]="toCity()"
+          label="TO"
+          (cityChange)="onToCityChange($event)"
+          class="w-full pl-2 hover:bg-blue-100/70 transition-colors duration-75"
+        />
+      </div>
+      <depature-date-picker
+        class="hover:bg-blue-100/70 transition-colors duration-75 px-4"
+      ></depature-date-picker>
+      <return-date-picker
+        class="hover:bg-blue-100/70 transition-colors duration-75 w-43.25!"
+      ></return-date-picker>
+      <app-travellers
+        class="hover:bg-blue-100/70 transition-colors duration-75 px-4"
+      ></app-travellers>
+      <app-cabin-class-popover
+        class="w-45 hover:bg-blue-100/70 transition-colors duration-75"
+      ></app-cabin-class-popover>
+    </div>
+    <app-special-fares></app-special-fares>
+
+    <div
+      class="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30 shadow-lg px-4 py-1.5 flex items-center gap-6 whitespace-nowrap"
+    >
+      <button
+        (click)="onSearch()"
+        class="bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black text-xl px-20 py-2 rounded-full shadow-xl tracking-wider cursor-pointer transition-all transform hover:scale-105"
+      >
+        SEARCH
+      </button>
+    </div>
+  </div>
+</div>
