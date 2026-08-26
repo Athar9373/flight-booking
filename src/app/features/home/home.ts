@@ -10,20 +10,4 @@ import { FlightSearch } from './flight-search/flight-search';
 })
 export class Home {
   lastScrollY = signal<number>(0);
-  isHidden = signal<boolean>(false);
-
-  @HostListener('window:scroll')
-  onScroll() {
-    const currentScrollY = window.scrollY;
-
-    if (currentScrollY > this.lastScrollY() && currentScrollY > 100) {
-      // Scrolling down
-      this.isHidden.set(true);
-    } else {
-      // Scrolling up
-      this.isHidden.set(false);
-    }
-
-    this.lastScrollY.set(currentScrollY);
-  }
 }

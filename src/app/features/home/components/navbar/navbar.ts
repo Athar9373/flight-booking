@@ -7,6 +7,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { Login } from '../../../Auth/login-model/login-model';
 import { Avatar } from '../avtaar/avtaar';
 import { Auth } from '../../../Auth/auth';
+import { FlightSearchService } from '../../flight-search/service/flight-search';
 
 @Component({
   selector: 'app-navbar',
@@ -98,9 +99,10 @@ import { Auth } from '../../../Auth/auth';
 })
 export class Navbar {
   private readonly auth = inject(Auth);
+  private readonly flightService = inject(FlightSearchService);
   showLoginModel = signal<boolean>(false);
 
   isLoggedIn = this.auth.isLoggedIn();
 
-  isHidden = input<boolean>(false);
+  isHidden = this.flightService.isHidden;
 }

@@ -266,6 +266,7 @@ export class FlightSearchService {
   totalCount = computed(() => this.adultsCount() + this.childrenCount() + this.infantsCount());
   selectedFare = signal<string>(this.Economyfare()[0].id);
   tripType = signal<TripTypeOption>('one-way');
+  isHidden = signal<boolean>(false);
 
   startDate = signal<Date>(new Date());
   endDate = signal<Date | null>(null);
