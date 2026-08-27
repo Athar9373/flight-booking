@@ -1,5 +1,5 @@
 import { computed, Service, signal } from '@angular/core';
-import { AirportType, CabinOption, faresType, TripTypeOption } from '../../model/types';
+import { AirportType, CabinOption, FareFilterCategory, TripTypeOption } from '../../model/types';
 
 @Service()
 export class FlightSearchService {
@@ -69,7 +69,7 @@ export class FlightSearchService {
     },
   ];
 
-  readonly Economyfare = signal<faresType[]>([
+  readonly Economyfare = signal<FareFilterCategory[]>([
     {
       id: 'Regular',
       title: 'Regular',
