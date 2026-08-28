@@ -159,7 +159,6 @@ import { lucideChevronDown, lucideHeart, lucideMoveRight } from '@ng-icons/lucid
           type="button"
           aria-label="Add flight to favorites"
           class="absolute right-4 top-3 cursor-pointer"
-          (click)="showFaresModal.emit(flightData())"
         >
           <ng-icon name="lucideHeart" size="22" class="text-gray-900 [&>svg]:stroke-gray-900" />
         </button>
@@ -174,6 +173,7 @@ import { lucideChevronDown, lucideHeart, lucideMoveRight } from '@ng-icons/lucid
             hlmBtn
             variant="outline"
             size="lg"
+            (click)="showFaresModal.emit(flightData())"
             class="mt-2 flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-primary text-sm font-semibold uppercase text-white active:scale-[0.98]! hover:bg-primary/90 hover:text-white"
           >
             View Fare

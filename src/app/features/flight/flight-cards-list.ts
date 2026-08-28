@@ -2,17 +2,19 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideHeart, lucideChevronDown, lucideMoveRight, lucideChevronUp } from '@ng-icons/lucide';
-import { FlightDetails } from '../home/model/types';
+import { faresType, FlightDetails } from '../home/model/types';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { FlightDetailsModel } from './components/flight-details-model/flight-details-model';
 import { FlightCardService } from './service/flight-card';
 import { FlightApi } from '../../core/api/flight-api';
 import { FlightCard } from './components/flight-card/flight-card';
+import { FaresView } from './components/fares-view/fares-view';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-card-list',
   standalone: true,
-  imports: [CommonModule, HlmButtonImports, FlightDetailsModel, FlightCard],
+  imports: [CommonModule, HlmButtonImports, FlightDetailsModel, FlightCard, FaresView],
   providers: [
     provideIcons({
       lucideHeart,
@@ -29,6 +31,9 @@ export class FlightCardList {
   flightData = inject(FlightApi).flightDetails;
   showFlightDetailsModel = this.flightCardService.showFlightDetailsModel;
   selectedFlight = this.flightCardService.selectedFlight;
+  router = inject(Router);
+
+  proceedToSeatSelection = this.flightCardService.proceedToSeatSelection;
 
   onFlightSelectFromCard(flight: FlightDetails) {
     this.selectedFlight.set(flight);
@@ -38,7 +43,12 @@ export class FlightCardList {
     this.selectedFlight.set(null);
   }
 
-  onFareViewClick(flightData: FlightDetails): void {
+  onFaresViewClick(flightData: FlightDetails): void {
     this.FareViewModal.set(flightData);
+  }
+
+  SeatSelection(selectedFlight: { Selectedfare: faresType; flight: FlightDetails }): void {
+    this.proceedToSeatSelection(selectedFlight);
+    this.router.navigateByUrl('/booking');
   }
 }

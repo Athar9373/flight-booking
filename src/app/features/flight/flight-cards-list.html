@@ -3,6 +3,7 @@
     <app-flight-card
       [flightData]="flightDetail"
       (onFlightSelect)="onFlightSelectFromCard($event)"
+      (showFaresModal)="onFaresViewClick($event)"
     />
   }
 </div>
@@ -12,8 +13,14 @@
     <app-flight-card
       [flightData]="flight"
       (onFlightSelect)="onFlightSelectFromModal($event)"
-      (showFaresModal)="onFareViewClick($event)"
+      (showFaresModal)="onFaresViewClick($event)"
     />
   </app-flight-details-model>
 }
-@if (FareViewModal(); as flight) {}
+@if (FareViewModal(); as flight) {
+  <app-fares-view
+    [flight]="flight"
+    (closePriceModal)="FareViewModal.set(null)"
+    (proceedToSeatSelection)="SeatSelection($event)"
+  ></app-fares-view>
+}

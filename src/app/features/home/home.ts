@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Navbar } from './components/navbar/navbar';
 import { FlightSearch } from './flight-search/flight-search';
-import { FlightCardList } from '../flight-card-lists/flight-cards-list';
+import { FlightCardList } from '../flight/flight-cards-list';
 
 @Component({
   imports: [Navbar, FlightSearch, FlightCardList],
