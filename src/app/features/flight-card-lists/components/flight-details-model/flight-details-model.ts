@@ -20,10 +20,10 @@ export interface FlightSegment {
   styleUrl: './flight-details-model.css',
   template: `
     <div
-      class="fixed inset-0 bg-black/50 z-50 flex justify-center items-center p-4 overflow-y-auto border-white "
+      class="fixed inset-0 bg-black/50 z-50 flex justify-center items-center p-4 overflow-y-auto border-white backdrop-blur-sm"
       (click)="closeModal.emit()"
     >
-      <div class="flex justify-center flex-col items-center translate-y-1/10 gap-23">
+      <div class="flex justify-center flex-col items-center gap-3">
         <div class="w-screen flex justify-center items-center "><ng-content></ng-content></div>
         <div
           class="bg-white flex flex-col gap-4 p-6 rounded-xl w-full max-w-3xl shadow-2xl max-h-[60vh] overflow-y-auto"
@@ -202,7 +202,6 @@ export interface FlightSegment {
 export class FlightDetailsModel {
   flightData = input.required<FlightDetails>();
   closeModal = output<void>();
-
   // Signal computed property to map any N number of stops into flight legs dynamically
   flightSegments = computed<FlightSegment[]>(() => {
     const flight = this.flightData();

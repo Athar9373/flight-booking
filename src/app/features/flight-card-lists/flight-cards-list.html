@@ -1,0 +1,19 @@
+<div class="mt-10 flex justify-center items-center flex-col gap-4">
+  @for (flightDetail of flightData; track flightDetail.flightNumber) {
+    <app-flight-card
+      [flightData]="flightDetail"
+      (onFlightSelect)="onFlightSelectFromCard($event)"
+    />
+  }
+</div>
+
+@if (selectedFlight(); as flight) {
+  <app-flight-details-model [flightData]="flight" (closeModal)="selectedFlight.set(null)">
+    <app-flight-card
+      [flightData]="flight"
+      (onFlightSelect)="onFlightSelectFromModal($event)"
+      (showFaresModal)="onFareViewClick($event)"
+    />
+  </app-flight-details-model>
+}
+@if (FareViewModal(); as flight) {}

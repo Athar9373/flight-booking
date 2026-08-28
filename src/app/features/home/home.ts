@@ -1,17 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Navbar } from './components/navbar/navbar';
 import { FlightSearch } from './flight-search/flight-search';
-import { FlightCard } from '../flight-card/flight-card';
-import { FlightApi } from '../../core/api/flight-api';
+import { FlightCardList } from '../flight-card-lists/flight-cards-list';
 
 @Component({
-  imports: [Navbar, FlightSearch, FlightCard],
+  imports: [Navbar, FlightSearch, FlightCardList],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
 })
-export class Home {
-  flightService = inject(FlightApi);
-
-  flightData = this.flightService.flightDetails;
-}
+export class Home {}
