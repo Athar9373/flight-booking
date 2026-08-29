@@ -1,6 +1,6 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { provideIcons } from '@ng-icons/core';
 import { lucideHeart, lucideChevronDown, lucideMoveRight, lucideChevronUp } from '@ng-icons/lucide';
 import { faresType, FlightDetails } from '../home/model/types';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
@@ -10,11 +10,20 @@ import { FlightApi } from '../../core/api/flight-api';
 import { FlightCard } from './components/flight-card/flight-card';
 import { FaresView } from './components/fares-view/fares-view';
 import { Router } from '@angular/router';
+import { DayViewMiniGrid } from './components/day-view-mini-grid/day-view-mini-grid';
+import { HlmCarousel, HlmCarouselContent, HlmCarouselItem } from '@spartan-ng/helm/carousel';
 
 @Component({
   selector: 'app-flight-card-list',
   standalone: true,
-  imports: [CommonModule, HlmButtonImports, FlightDetailsModel, FlightCard, FaresView],
+  imports: [
+    CommonModule,
+    HlmButtonImports,
+    FlightDetailsModel,
+    FlightCard,
+    FaresView,
+    DayViewMiniGrid,
+  ],
   providers: [
     provideIcons({
       lucideHeart,

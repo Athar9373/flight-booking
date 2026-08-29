@@ -137,7 +137,7 @@ export interface FlightSegment {
 
               <!-- Baggage Column -->
               <div
-                class="w-full md:w-64 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center gap-3"
+                class="w-full md:w-64 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center gap-1"
               >
                 <h3 class="text-sm font-bold text-gray-700 uppercase tracking-wider">
                   Baggage Allowance

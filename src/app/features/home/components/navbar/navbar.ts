@@ -1,21 +1,17 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { lucideHeart, lucideLuggage } from '@ng-icons/lucide';
 import { provideIcons, NgIcon } from '@ng-icons/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Avatar } from '../avtaar/avtaar';
 import { Auth } from '../../../Auth/auth';
-import { FlightSearchService } from '../../flight-search/service/flight-search';
 
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, Avatar, NgIcon, NgOptimizedImage],
   providers: [provideIcons({ lucideHeart, lucideLuggage })],
   template: `
-    <nav
-      class="fixed top-0 left-0 w-full z-50  transition-transform duration-300"
-      [class.-translate-y-full]="isHidden()"
-    >
+    <nav class="fixed top-0 left-0 w-full z-50  transition-transform duration-300">
       <div
         class="max-w-7xl mx-auto w-[90%] lg:w-[70%] h-15 flex justify-between items-center px-4 bg-black/40 my-1 rounded-xl"
       >
@@ -94,10 +90,6 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
 })
 export class Navbar {
   private readonly auth = inject(Auth);
-  private readonly flightService = inject(FlightSearchService);
   showLoginModel = this.auth.showLoginModal;
-
   isLoggedIn = this.auth.isLoggedIn();
-
-  isHidden = this.flightService.isHidden;
 }
