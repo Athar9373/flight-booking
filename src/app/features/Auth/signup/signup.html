@@ -1,0 +1,232 @@
+<!-- Modal Backdrop -->
+<div
+  class="fixed inset-0 z-1000 flex items-center justify-center bg-black/60 p-4"
+  (click)="closeSignupModel()"
+>
+  <!-- Modal Content Card -->
+  <div
+    (click)="$event.stopPropagation()"
+    class="relative flex w-full max-w-115 flex-col rounded-xl border border-border bg-card p-6 shadow-lg max-h-[90vh] overflow-y-auto"
+  >
+    <!-- Close Button -->
+    <button
+      type="button"
+      (click)="closeSignupModel()"
+      class="absolute right-4 top-4 rounded-sm text-muted-foreground transition-opacity hover:text-foreground focus:outline-none"
+    >
+      <ng-icon name="lucideX" size="23" class="cursor-pointer" />
+    </button>
+
+    <!-- Logo -->
+    <div class="mb-2 flex justify-center">
+      <img src="/logo1.png" alt="Make my trip" class="h-12 object-contain" />
+    </div>
+
+    <div class="flex flex-col gap-4 mt-2">
+      <!-- Google Signup Button -->
+      <button
+        hlmBtn
+        variant="outline"
+        size="lg"
+        type="button"
+        class="w-full gap-2.5 rounded-xl border border-primary/80 cursor-pointer py-2"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="size-6 shrink-0">
+          <path
+            fill="#FFC107"
+            d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
+          ></path>
+          <path
+            fill="#FF3D00"
+            d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+          ></path>
+          <path
+            fill="#4CAF50"
+            d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
+          ></path>
+          <path
+            fill="#1976D2"
+            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
+          ></path>
+        </svg>
+        <span class="text-sm text-primary font-semibold">Sign up with Google</span>
+      </button>
+
+      <hlm-field-separator class="my-1 text-sm">Or sign up with email</hlm-field-separator>
+
+      <!-- Signup Form -->
+      <form [formRoot]="form" class="flex flex-col gap-3">
+        <!-- First Name & Last Name Group -->
+        <hlm-field-group class="grid grid-cols-2 gap-3">
+          <hlm-field>
+            <label hlmFieldLabel for="form-firstName">First Name</label>
+            <hlm-input-group class="h-10!">
+              <input
+                hlmInputGroupInput
+                type="text"
+                placeholder="King"
+                id="form-firstName"
+                [formField]="form.firstName"
+                class="placeholder:text-sm"
+              />
+            </hlm-input-group>
+            <p class="text-xs text-destructive">
+              @if (form.firstName().invalid() && form.firstName().touched()) {
+                {{ form.firstName().errors()[0]?.message }}
+              }
+            </p>
+          </hlm-field>
+
+          <hlm-field>
+            <label hlmFieldLabel for="form-lastName">Last Name</label>
+            <hlm-input-group class="h-10!">
+              <input
+                hlmInputGroupInput
+                type="text"
+                placeholder="Leonidas"
+                id="form-lastName"
+                [formField]="form.lastName"
+                class="placeholder:text-sm"
+              />
+            </hlm-input-group>
+            <p class="text-xs text-destructive">
+              @if (form.lastName().invalid() && form.lastName().touched()) {
+                {{ form.lastName().errors()[0]?.message }}
+              }
+            </p>
+          </hlm-field>
+        </hlm-field-group>
+
+        <!-- Email Field -->
+        <hlm-field>
+          <label hlmFieldLabel for="form-email">Email</label>
+          <hlm-input-group class="h-10!">
+            <input
+              hlmInputGroupInput
+              type="email"
+              placeholder="Enter your email"
+              id="form-email"
+              [formField]="form.email"
+              class="placeholder:text-sm"
+            />
+          </hlm-input-group>
+          <p class="text-xs text-destructive">
+            @if (form.email().invalid() && form.email().touched()) {
+              {{ form.email().errors()[0]?.message }}
+            }
+          </p>
+        </hlm-field>
+
+        <!-- Country Code & Mobile Number Group -->
+        <hlm-field-group class="grid grid-cols-[120px_1fr] gap-3">
+          <hlm-field>
+            <label hlmFieldLabel for="form-countryCode">Code</label>
+            <hlm-select [formField]="form.countryCode" [itemToString]="itemToString" class="w-full">
+              <hlm-select-trigger class="h-10! w-full text-xs">
+                <hlm-select-value />
+              </hlm-select-trigger>
+              <hlm-select-content *hlmSelectPortal class="z-1050">
+                <hlm-select-group>
+                  @for (country of countryCodes; track country.code) {
+                    <hlm-select-item [value]="country.code" class="text-xs">
+                      <span>{{ country.flag }}</span> <span class="pl-2">{{ country.code }}</span>
+                    </hlm-select-item>
+                  }
+                </hlm-select-group>
+              </hlm-select-content>
+            </hlm-select>
+          </hlm-field>
+
+          <hlm-field>
+            <label hlmFieldLabel for="form-mobile">Mobile Number</label>
+            <hlm-input-group class="h-10!">
+              <input
+                hlmInputGroupInput
+                type="tel"
+                placeholder="98765 43210"
+                id="form-mobile"
+                [formField]="form.mobile"
+                class="placeholder:text-sm"
+              />
+            </hlm-input-group>
+            <p class="text-xs text-destructive">
+              @if (form.mobile().invalid() && form.mobile().touched()) {
+                {{ form.mobile().errors()[0]?.message }}
+              }
+            </p>
+          </hlm-field>
+        </hlm-field-group>
+
+        <!-- Password Field -->
+        <hlm-field>
+          <label hlmFieldLabel for="form-password">Password</label>
+          <hlm-input-group class="h-10!">
+            <input
+              hlmInputGroupInput
+              [type]="showPassword() ? 'text' : 'password'"
+              placeholder="Create password"
+              id="form-password"
+              [formField]="form.password"
+              class="placeholder:text-sm"
+            />
+            <hlm-input-group-addon
+              align="inline-end"
+              class="cursor-pointer"
+              (click)="toggleShowPassword()"
+            >
+              <ng-icon [name]="showPassword() ? 'lucideEyeOff' : 'lucideEye'" size="18" />
+            </hlm-input-group-addon>
+          </hlm-input-group>
+          <p class="text-xs text-destructive">
+            @if (form.password().invalid() && form.password().touched()) {
+              {{ form.password().errors()[0]?.message }}
+            }
+          </p>
+        </hlm-field>
+
+        <!-- Confirm Password Field -->
+        <hlm-field>
+          <label hlmFieldLabel for="form-confirmPassword">Confirm Password</label>
+          <hlm-input-group class="h-10!">
+            <input
+              hlmInputGroupInput
+              [type]="showConfirmPassword() ? 'text' : 'password'"
+              placeholder="Confirm password"
+              id="form-confirmPassword"
+              [formField]="form.confirmPassword"
+              class="placeholder:text-sm"
+            />
+            <hlm-input-group-addon
+              align="inline-end"
+              class="cursor-pointer"
+              (click)="toggleShowConfirmPassword()"
+            >
+              <ng-icon [name]="showConfirmPassword() ? 'lucideEyeOff' : 'lucideEye'" size="18" />
+            </hlm-input-group-addon>
+          </hlm-input-group>
+          <p class="text-xs text-destructive">
+            @if (form.confirmPassword().invalid() && form.confirmPassword().touched()) {
+              {{ form.confirmPassword().errors()[0]?.message }}
+            }
+          </p>
+        </hlm-field>
+
+        <button hlmBtn size="lg" type="submit" class="mt-2 w-full hover:bg-primary/80 text-sm">
+          Create Account
+        </button>
+      </form>
+
+      <div>
+        <p hlmFieldDescription class="text-center">
+          Already have an account?
+          <a
+            (click)="onLoginClicked()"
+            class="font-medium underline underline-offset-4 hover:text-primary cursor-pointer"
+          >
+            Log in
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

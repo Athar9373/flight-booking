@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, effect, inject, model, signal } from '@angular/core';
 import {
   email,
   form,
@@ -28,7 +27,6 @@ import { Auth } from '../auth';
   selector: 'login-model',
   standalone: true,
   imports: [
-    RouterLink,
     HlmInputGroupImports,
     NgIcon,
     HlmField,
@@ -164,8 +162,8 @@ import { Auth } from '../auth';
             <p hlmFieldDescription class="text-center">
               Don't have an account?
               <a
-                routerLink="/signin"
-                class="font-medium underline underline-offset-4 hover:text-primary"
+                (click)="onSignUpClick()"
+                class="font-medium underline underline-offset-4 hover:text-primary cursor-pointer"
               >
                 Sign up
               </a>
@@ -177,10 +175,10 @@ import { Auth } from '../auth';
   `,
 })
 export class Login {
-  showLoginModel = model<boolean>(false);
-  showPassword = signal<boolean>(false);
-
   Auth = inject(Auth);
+  showLoginModal = this.Auth.showLoginModal;
+  showPassword = signal<boolean>(false);
+  showSignUpModal = this.Auth.showSignUpModal;
 
   protected readonly _model = signal({
     email: '',
@@ -222,7 +220,7 @@ export class Login {
           this.Auth.Login(this._model());
 
           if (this.Auth.isLoggedIn()) {
-            this.showLoginModel.set(false);
+            this.showLoginModal.set(false);
           }
         },
       },
@@ -234,6 +232,11 @@ export class Login {
   }
 
   closeLoginModel() {
-    this.showLoginModel.set(false);
+    this.showLoginModal.set(false);
+  }
+
+  onSignUpClick() {
+    this.showLoginModal.set(false);
+    this.showSignUpModal.set(true);
   }
 }
