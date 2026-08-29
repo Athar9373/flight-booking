@@ -1,15 +1,17 @@
 import { Service, signal } from '@angular/core';
-
-export type LoginFormType = { email: string; password: string };
+import { LoginFormType, SignupFormType } from './model/AuthTypes';
 
 @Service()
 export class Auth {
   isLoggedIn = signal<boolean>(false);
+  showLoginModal = signal<boolean>(false);
+  showSignUpModal = signal<boolean>(false);
 
   Login(data: LoginFormType) {
     console.log(data);
-    this.isLoggedIn.set(true);
   }
   Logout() {}
-  SignUp() {}
+  Signup(formData: SignupFormType) {
+    console.log(formData);
+  }
 }

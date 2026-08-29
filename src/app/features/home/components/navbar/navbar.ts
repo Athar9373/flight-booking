@@ -1,17 +1,15 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
 import { lucideHeart, lucideLuggage } from '@ng-icons/lucide';
 import { provideIcons, NgIcon } from '@ng-icons/core';
 import { NgOptimizedImage } from '@angular/common';
-import { Login } from '../../../Auth/login-model/login-model';
 import { Avatar } from '../avtaar/avtaar';
 import { Auth } from '../../../Auth/auth';
 import { FlightSearchService } from '../../flight-search/service/flight-search';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, Avatar, NgIcon, NgOptimizedImage, Login],
+  imports: [RouterLink, Avatar, NgIcon, NgOptimizedImage],
   providers: [provideIcons({ lucideHeart, lucideLuggage })],
   template: `
     <nav
@@ -92,15 +90,12 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
         </div>
       </div>
     </nav>
-    @if (showLoginModel() && !isLoggedIn) {
-      <login-model [(showLoginModel)]="showLoginModel"></login-model>
-    }
   `,
 })
 export class Navbar {
   private readonly auth = inject(Auth);
   private readonly flightService = inject(FlightSearchService);
-  showLoginModel = signal<boolean>(false);
+  showLoginModel = this.auth.showLoginModal;
 
   isLoggedIn = this.auth.isLoggedIn();
 
