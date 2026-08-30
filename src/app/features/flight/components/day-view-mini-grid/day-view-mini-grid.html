@@ -1,24 +1,35 @@
-<div class="mx-auto mt-5 w-full max-w-320">
+<div class="mx-auto mt-5 w-full max-w-7xl">
   <!-- Wrapper provides positioning context -->
-  <div class="relative bg-white rounded-xl border border-gray-200 shadow-sm px-15 py-3">
+  <div class="relative bg-white rounded-xl border border-gray-200 shadow-sm px-15 py-0">
     <hlm-carousel class="w-full overflow-visible">
       <hlm-carousel-content class="-ml-3">
         @for (item of DATE_PRICE_CAROUSEL_DATA; track item.id) {
-          <hlm-carousel-item class="pl-3 basis-1/3 sm:basis-1/5 md:basis-[12.5%]">
+          <hlm-carousel-item class="basis-1/3 sm:basis-1/5 md:basis-[12.5%] pl-0!">
             <div
               [class]="dateCardClass"
-              [class.!bg-primary]="selectedDateId() === item.id"
+              [class.!bg-blue-900]="selectedDateId() === item.id"
               /* [class.!border-[]="selectedDateId() === item.id" */
               [class.!text-white]="selectedDateId() === item.id && !item.isFlexibleCard"
               (click)="selectedDateId.set(item.id)"
             >
               @if (item.isFlexibleCard) {
-                <span
-                  class="text-xs font-semibold leading-tight text-center whitespace-pre-line text-gray-600"
-                  [class.!text-white]="selectedDateId() === item.id"
+                <div
+                  class="flex flex-col gap-1 items-center justify-center"
+                  [class.text-white]="selectedDateId() === item.id"
+                  [class.text-gray-600]="selectedDateId() !== item.id"
                 >
-                  {{ item.dateStr }}
-                </span>
+                  <ng-icon
+                    name="lucideCalendar"
+                    size="25"
+                    class="[&>svg]:stroke-current [&>svg]:stroke-[2.5px] transition-colors"
+                  />
+                  <span
+                    class="text-xs font-semibold leading-tight text-center whitespace-pre-line text-gray-600 transition-colors"
+                    [class.!text-white]="selectedDateId() === item.id"
+                  >
+                    {{ item.dateStr }}
+                  </span>
+                </div>
               } @else {
                 <span
                   class="text-xs font-medium text-gray-500 sm:text-sm"
@@ -42,12 +53,12 @@
       <!-- Override the library's positioning with !important -->
       <button
         hlm-carousel-previous
-        class="!absolute !-left-10 !top-1/2 !-translate-y-1/2 !z-20 !h-8 !w-8 !rounded-full !border !border-gray-200 !bg-white !shadow-sm flex items-center justify-center hover:!bg-gray-50 active:scale-95 transition-all"
+        class="absolute -left-10! top-1/2! -translate-y-1/2! z-20! h-8! w-8! rounded-full! border! border-gray-200! bg-white! shadow-sm! flex items-center justify-center hover:bg-gray-50! active:scale-95! transition-all!"
       ></button>
 
       <button
         hlm-carousel-next
-        class="!absolute !-right-10 !top-1/2 !-translate-y-1/2 !z-20 !h-8 !w-8 !rounded-full !border !border-gray-200 !bg-white !shadow-sm flex items-center justify-center hover:!bg-gray-50 active:scale-95 transition-all"
+        class="absolute -right-10! top-1/2! -translate-y-1/2! z-20! h-8! w-8! rounded-full! border! border-gray-200! bg-white! shadow-sm! flex items-center justify-center hover:bg-gray-50! active:scale-95! transition-all!"
       ></button>
     </hlm-carousel>
   </div>

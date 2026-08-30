@@ -3,6 +3,8 @@ import { DecimalPipe } from '@angular/common';
 import { HlmCarouselImports } from '@spartan-ng/helm/carousel';
 import { HlmHoverCardImports } from '@spartan-ng/helm/hover-card';
 import { hlm } from '@spartan-ng/helm/utils';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideCalendar } from '@ng-icons/lucide';
 
 export interface DatePriceOption {
   id: string;
@@ -15,7 +17,8 @@ export interface DatePriceOption {
 @Component({
   selector: 'app-day-view-mini-grid',
   standalone: true,
-  imports: [HlmCarouselImports, HlmHoverCardImports, DecimalPipe],
+  imports: [HlmCarouselImports, HlmHoverCardImports, DecimalPipe, NgIcon],
+  providers: [provideIcons({ lucideCalendar })],
   templateUrl: './day-view-mini-grid.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'flex w-full items-center justify-center p-4' },
@@ -41,9 +44,8 @@ export class DayViewMiniGrid {
   ];
 
   public selectedDateId = signal<string>('4');
-
   dateCardClass = hlm(
-    'relative flex h-[72px] cursor-pointer flex-col items-center justify-center p-2 text-center transition-all duration-150 select-none rounded-lg border border-transparent',
-    'bg-white text-gray-700 hover:bg-gray-50',
+    'relative flex h-[72px] cursor-pointer flex-col items-center justify-center p-3 text-center transition-all duration-150 select-none rounded-s, border border-transparent',
+    'bg-white text-gray-700 hover:bg-blue-100',
   );
 }

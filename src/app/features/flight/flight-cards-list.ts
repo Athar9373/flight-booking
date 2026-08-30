@@ -11,7 +11,7 @@ import { FlightCard } from './components/flight-card/flight-card';
 import { FaresView } from './components/fares-view/fares-view';
 import { Router } from '@angular/router';
 import { DayViewMiniGrid } from './components/day-view-mini-grid/day-view-mini-grid';
-import { HlmCarousel, HlmCarouselContent, HlmCarouselItem } from '@spartan-ng/helm/carousel';
+import { FlightSortTabs } from './components/flight-sort-tabs/flight-sort-tabs';
 
 @Component({
   selector: 'app-flight-card-list',
@@ -23,6 +23,7 @@ import { HlmCarousel, HlmCarouselContent, HlmCarouselItem } from '@spartan-ng/he
     FlightCard,
     FaresView,
     DayViewMiniGrid,
+    FlightSortTabs,
   ],
   providers: [
     provideIcons({

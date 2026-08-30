@@ -26,7 +26,8 @@
       "@spartan-ng/helm/hover-card": ["./src/shared/ui/hover-card/src/index.ts"],
       "@spartan-ng/helm/radio-group": ["./src/shared/ui/radio-group/src/index.ts"],
       "@spartan-ng/helm/select": ["./src/shared/ui/select/src/index.ts"],
-      "@spartan-ng/helm/carousel": ["./src/shared/ui/carousel/src/index.ts"]
+      "@spartan-ng/helm/carousel": ["./src/shared/ui/carousel/src/index.ts"],
+      "@spartan-ng/helm/tabs": ["./src/shared/ui/tabs/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

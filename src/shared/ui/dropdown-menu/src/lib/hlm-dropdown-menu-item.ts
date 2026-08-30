@@ -34,9 +34,19 @@ export class HlmDropdownMenuItem {
   });
 
   constructor() {
-    classes(
-      () =>
-        "hover:bg-accent focus:bg-accent hover:text-accent-foreground focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10 data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:hover:bg-destructive/20 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:hover:text-destructive data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[ng-icon]:text-destructive not-data-[variant=destructive]:hover:**:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground gap-1.5 rounded-md px-1.5 py-1 text-sm data-inset:ps-7 [&_ng-icon:not([class*='text-'])]:text-[length:--spacing(4)] group/dropdown-menu-item relative flex w-full cursor-default items-center outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_ng-icon]:pointer-events-none [&_ng-icon]:shrink-0",
-    );
+    classes(() => [
+      // Base layout & typography
+      'group/dropdown-menu-item relative flex w-full cursor-default items-center gap-1.5 rounded-sm px-3 py-1 text.base text-gray-700 outline-hidden select-none text-[16px]',
+      "data-inset:ps-7 [&_ng-icon:not([class*='text-'])]text-[length:--spacing(4)] [&_ng-icon]:pointer-events-none [&_ng-icon]:shrink-0",
+
+      // Default hover & focus state (Gray text, Gray bg on hover/focus)
+      'not-data-[variant=destructive]:text-gray-700 not-data-[variant=destructive]:hover:bg-gray-100 not-data-[variant=destructive]:hover:text-gray-900 not-data-[variant=destructive]:focus:bg-gray-100 not-data-[variant=destructive]:focus:text-gray-900',
+
+      // Destructive variant override
+      'data-[variant=destructive]:text-destructive data-[variant=destructive]:hover:bg-destructive/10 data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:hover:bg-destructive/20 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:hover:text-destructive data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[ng-icon]:text-destructive',
+
+      // Disabled state
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
+    ]);
   }
 }

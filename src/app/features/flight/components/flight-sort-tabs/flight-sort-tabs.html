@@ -1,0 +1,77 @@
+<hlm-tabs hlmTabs="best" class="w-full max-w-182" [hlmTabs]="selectedTab()">
+  <hlm-tabs-list
+    aria-label="flight sort tabs"
+    class="grid w-full grid-cols-4 rounded-xl border border-gray-200 bg-white mb-6 shadow-xs h-20"
+  >
+    <!-- Best Tab -->
+    <button
+      hlmTabsTrigger="best"
+      class="flex flex-col items-start justify-center w-full h-full py-2 px-4 gap-0 rounded-none rounded-l-lg transition-colors data-[state=active]:bg-blue-900! data-[state=active]:text-white! text-gray-700 hover:bg-gray-100"
+    >
+      <span class="text-xs font-medium p-0 m-0">Best</span>
+      <span class="font-bold tracking-tight text-xl p-0 m-0">₹5,550</span>
+      <span class="text-xs font-normal opacity-80 p-0 m-0">2h 30m</span>
+    </button>
+
+    <!-- Cheapest Tab -->
+    <button
+      hlmTabsTrigger="cheapest"
+      class="flex flex-col items-start justify-center w-full h-full py-2 px-4 gap-0 rounded-none transition-colors data-[state=active]:bg-blue-900! data-[state=active]:text-white! text-gray-700 hover:bg-gray-100"
+    >
+      <span class="text-xs font-medium">Cheapest</span>
+      <span class="font-bold tracking-tight text-xl">₹5,550</span>
+      <span class="text-xs font-normal opacity-80">2h 30m</span>
+    </button>
+
+    <!-- Fastest Tab -->
+    <button
+      hlmTabsTrigger="fastest"
+      class="flex flex-col items-start justify-center w-full h-full py-2 px-4 gap-0 rounded-none r transition-colors data-[state=active]:bg-blue-900! data-[state=active]:text-white! text-gray-700 hover:bg-gray-100"
+    >
+      <span class="text-xs font-medium">Fastest</span>
+      <span class="font-bold tracking-tight text-xl">₹5,550</span>
+      <span class="text-xs font-normal opacity-80">2h 30m</span>
+    </button>
+
+    <!-- Sort Dropdown Trigger -->
+    <button
+      hlmBtn
+      variant="outline"
+      [hlmDropdownMenuTrigger]="menu"
+      align="start"
+      [hlmTabsTrigger]="selectedTab() === 'outbound' ? 'outbound' : ''"
+      class="flex items-center justify-center w-full h-full gap-1 border-0! rounded-none! rounded-r-lg! transition-colors data-[state=active]:bg-blue-900! data-[state=active]:text-white! text-gray-700 hover:bg-gray-100"
+    >
+      <span class="text-base font-bold">{{
+        selectedTab() === 'outbound' ? 'Outbound' : 'Sort'
+      }}</span>
+      <ng-icon
+        name="lucideChevronDown"
+        size="18"
+        class="[&>svg]:stroke-current [&>svg]:stroke-[10px]"
+      />
+    </button>
+
+    <ng-template #menu class="w-full">
+      <hlm-dropdown-menu>
+        <hlm-dropdown-menu-group>
+          <button hlmDropdownMenuItem (click)="selectedTab.set('best')">Best</button>
+          <button hlmDropdownMenuItem (click)="selectedTab.set('fastest')">Fastest first</button>
+          <button hlmDropdownMenuItem (click)="selectedTab.set('cheapest')">Cheapest first</button>
+          <button
+            hlmDropdownMenuItem
+            (click)="selectedTab.set('outbound')"
+            hlmTabsTrigger="outbound"
+          >
+            Outbound : departure time
+          </button>
+        </hlm-dropdown-menu-group>
+      </hlm-dropdown-menu>
+    </ng-template>
+  </hlm-tabs-list>
+
+  <div hlmTabsContent="best">Content Best</div>
+  <div hlmTabsContent="cheapest">Content Cheapest</div>
+  <div hlmTabsContent="fastest">Content Fastest</div>
+  <div hlmTabsContent="outbound">Outbound Fastest</div>
+</hlm-tabs>
