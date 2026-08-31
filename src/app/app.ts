@@ -2,7 +2,7 @@ import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FlightSearchService } from './features/home/flight-search/service/flight-search';
 import { Auth } from './features/Auth/auth';
-import { Login } from './features/Auth/login-model/login-model';
+import { Login } from './features/Auth/login-modal/login-modal';
 import { Signup } from './features/Auth/signup/signup';
 
 @Component({

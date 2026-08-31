@@ -6,27 +6,36 @@ import { hlm } from '@spartan-ng/helm/utils';
 
 @Component({
   selector: 'app-traveler-count-picker',
+  standalone: true,
   imports: [HlmRadioGroupImports, HlmLabelImports, FormsModule],
   template: `
-    <div class="mb-5">
-      <div class="flex justify-between gap-0.5 flex-col">
-        <span class="text-xs font-medium text-slate-800 uppercase">{{ label() }}</span>
+    <div class="w-full">
+      <!-- Label Header -->
+      <div class="flex flex-col justify-between mb-1.5">
+        <span class="text-xs font-bold text-slate-800 uppercase tracking-tight">
+          {{ label() }}
+        </span>
         <span class="text-[10px] text-slate-500"> on the day of travel </span>
       </div>
 
-      <hlm-radio-group
-        class="grid gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200 text-center w-full mt-2"
-        [style.grid-template-columns]="gridColumns()"
-        [ngModel]="count()"
-        (ngModelChange)="count.set($event)"
+      <!-- Fluid Container with Flex Wrapping / Overflow Support -->
+      <div
+        class="w-full overflow-x-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-0.5"
       >
-        @for (n of numArray(); track n) {
-          <label hlmLabel [class]="getCardClass(n)">
-            <hlm-radio [value]="n" class="sr-only" />
-            <span>{{ n }}</span>
-          </label>
-        }
-      </hlm-radio-group>
+        <hlm-radio-group
+          class="grid gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-center w-full"
+          [style.grid-template-columns]="gridColumns()"
+          [ngModel]="count()"
+          (ngModelChange)="count.set($event)"
+        >
+          @for (n of numArray(); track n) {
+            <label hlmLabel [class]="getCardClass(n)">
+              <hlm-radio [value]="n" class="sr-only" />
+              <span>{{ n }}</span>
+            </label>
+          }
+        </hlm-radio-group>
+      </div>
     </div>
   `,
 })
@@ -44,10 +53,10 @@ export class TravelerCountPickerComponent {
     const isSelected = this.count() === n;
 
     return hlm(
-      'flex items-center justify-center p-1.5 text-xs font-bold rounded-lg transition-colors cursor-pointer border',
+      'flex items-center justify-center min-w-[1.75rem] sm:min-w-0 h-8 sm:h-9 text-xs sm:text-sm font-bold rounded-lg transition-colors cursor-pointer select-none',
       isSelected
-        ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
-        : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100',
+        ? 'bg-blue-600 text-white shadow-sm'
+        : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 active:bg-slate-100',
     );
   }
 }

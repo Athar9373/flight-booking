@@ -6,6 +6,7 @@ export class Auth {
   isLoggedIn = signal<boolean>(false);
   showLoginModal = signal<boolean>(false);
   showSignUpModal = signal<boolean>(false);
+  showForgotPasswordModal = signal<boolean>(false);
 
   Login(data: LoginFormType) {
     console.log(data);

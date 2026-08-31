@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Navbar } from './components/navbar/navbar';
 import { FlightSearch } from './flight-search/flight-search';
-import { FlightCardList } from '../flight/flight-cards-list';
 
 @Component({
-  imports: [Navbar, FlightSearch, FlightCardList],
+  imports: [Navbar, FlightSearch],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',

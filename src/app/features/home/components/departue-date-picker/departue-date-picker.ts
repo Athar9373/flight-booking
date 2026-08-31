@@ -25,41 +25,47 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
     }),
   ],
   template: `
-    <hlm-popover sideOffset="5" class="w-full">
+    <hlm-popover sideOffset="5" class="w-full h-full">
       <button
         hlmPopoverTrigger
         hlmBtn
         variant="ghost"
         size="lg"
-        class="h-auto p-4 w-full min-w-0 text-left justify-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent data-[state=open]:bg-transparent"
+        class="h-auto p-2.5 sm:p-4 w-full min-w-0 text-left justify-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent data-[state=open]:bg-transparent"
       >
         <div class="w-full min-w-0">
           <div class="flex items-center justify-between w-full">
-            <span class="font-light text-slate-500 uppercase tracking-normal block">
+            <span
+              class="font-light text-slate-500 uppercase tracking-normal text-[11px] sm:text-xs block"
+            >
               Departure
             </span>
             <ng-icon
               name="lucideChevronDown"
-              class="text-[16px] shrink-0 ml-1 text-blue-400 [&>svg]:stroke-blue-400"
+              class="text-[14px] sm:text-[16px] shrink-0 ml-1 text-blue-400 [&>svg]:stroke-blue-400"
             />
           </div>
 
-          <h1 class="text-slate-900 mt-1 flex items-baseline">
-            <span class="text-3xl font-extrabold tracking-tight">
+          <h1 class="text-slate-900 mt-0.5 sm:mt-1 flex items-baseline min-w-0">
+            <span class="text-2xl sm:text-3xl font-extrabold tracking-tight shrink-0">
               {{ startDate().getDate() }}
             </span>
-            <span class="text-xl font-light ml-1.5">
+            <span class="text-lg sm:text-xl font-light ml-1.5 truncate">
               {{ startDate() | date: "MMM ''yy" }}
             </span>
           </h1>
 
-          <p class="text-sm text-slate-500 truncate mt-0.5">
+          <p class="text-xs sm:text-sm text-slate-500 truncate mt-0.5">
             {{ startDate() | date: 'EEEE' }}
           </p>
         </div>
       </button>
 
-      <hlm-popover-content class="w-auto p-6 shadow-2xl" *brnPopoverContent="let ctx" appear>
+      <hlm-popover-content
+        class="w-[94vw] sm:w-auto max-w-[calc(100vw-2rem)] p-3 sm:p-6 shadow-2xl rounded-2xl sm:rounded-3xl max-h-[85vh] overflow-y-auto"
+        *brnPopoverContent="let ctx"
+        appear
+      >
         <app-dual-calendar-grid
           mode="single"
           [selectedDate]="startDate()"

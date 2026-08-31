@@ -21,10 +21,12 @@ export interface DateRange {
     }),
   ],
   template: `
-    <div class="flex gap-8 divide-x divide-slate-100">
+    <div
+      class="flex flex-col md:flex-row gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-100 w-full"
+    >
       <!-- FIRST MONTH -->
-      <div class="flex flex-col min-w-80">
-        <div class="flex items-center justify-between pb-4">
+      <div class="flex flex-col w-full md:w-80">
+        <div class="flex items-center justify-between pb-3 sm:pb-4">
           <button
             hlmBtn
             variant="ghost"
@@ -36,16 +38,28 @@ export interface DateRange {
             <ng-icon name="lucideChevronLeft" class="text-base" />
           </button>
 
-          <span class="text-sm font-bold text-slate-800">
+          <span class="text-xs sm:text-sm font-bold text-slate-800">
             {{ firstMonth() | date: 'MMMM yyyy' }}
           </span>
 
-          <div class="w-8"></div>
+          <!-- Next Button for Mobile view when 2nd month is stacked or hidden -->
+          <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
+            class="h-8 w-8 text-slate-600 hover:bg-slate-100 rounded-full md:hidden"
+            (click)="nextMonth()"
+            [disabled]="isNextDisabled()"
+          >
+            <ng-icon name="lucideChevronRight" class="text-base" />
+          </button>
+
+          <div class="hidden md:block w-8"></div>
         </div>
 
         <div class="grid grid-cols-7 text-center mb-2">
           @for (day of weekDays; track day) {
-            <span class="text-sm font-semibold text-slate-400">{{ day }}</span>
+            <span class="text-xs sm:text-sm font-semibold text-slate-400">{{ day }}</span>
           }
         </div>
 
@@ -68,12 +82,12 @@ export interface DateRange {
         </div>
       </div>
 
-      <!-- SECOND MONTH -->
-      <div class="pl-8 flex flex-col w-90">
-        <div class="flex items-center justify-between pb-4">
+      <!-- SECOND MONTH (Visible on tablet/desktop) -->
+      <div class="hidden md:flex pt-6 md:pt-0 md:pl-8 flex-col w-full md:w-80">
+        <div class="flex items-center justify-between pb-3 sm:pb-4">
           <div class="w-8"></div>
 
-          <span class="text-sm font-bold text-slate-800">
+          <span class="text-xs sm:text-sm font-bold text-slate-800">
             {{ secondMonth() | date: 'MMMM yyyy' }}
           </span>
 
@@ -91,7 +105,7 @@ export interface DateRange {
 
         <div class="grid grid-cols-7 text-center mb-2">
           @for (day of weekDays; track day) {
-            <span class="text-sm font-semibold text-slate-400">{{ day }}</span>
+            <span class="text-xs sm:text-sm font-semibold text-slate-400">{{ day }}</span>
           }
         </div>
 
@@ -170,7 +184,7 @@ export class DualCalendarGrid {
   getDayClasses(date: Date): string {
     const time = this.normalizeDate(date).getTime();
     const base =
-      'h-10 w-full text-sm font-semibold transition-all flex items-center justify-center ';
+      'h-9 sm:h-10 w-full text-xs sm:text-sm font-semibold transition-all flex items-center justify-center ';
 
     if (this.mode() === 'single') {
       const selected = this.selectedDate()

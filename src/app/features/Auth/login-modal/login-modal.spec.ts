@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LoginModel } from './login-model';
+import { LoginModel } from './login-modal';
 
 describe('LoginModel', () => {
   let component: LoginModel;
