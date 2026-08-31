@@ -27,7 +27,9 @@
       "@spartan-ng/helm/radio-group": ["./src/shared/ui/radio-group/src/index.ts"],
       "@spartan-ng/helm/select": ["./src/shared/ui/select/src/index.ts"],
       "@spartan-ng/helm/carousel": ["./src/shared/ui/carousel/src/index.ts"],
-      "@spartan-ng/helm/tabs": ["./src/shared/ui/tabs/src/index.ts"]
+      "@spartan-ng/helm/tabs": ["./src/shared/ui/tabs/src/index.ts"],
+      "@spartan-ng/helm/accordion": ["./src/shared/ui/accordion/src/index.ts"],
+      "@spartan-ng/helm/checkbox": ["./src/shared/ui/checkbox/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

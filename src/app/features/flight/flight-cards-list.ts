@@ -12,6 +12,7 @@ import { FaresView } from './components/fares-view/fares-view';
 import { Router } from '@angular/router';
 import { DayViewMiniGrid } from './components/day-view-mini-grid/day-view-mini-grid';
 import { FlightSortTabs } from './components/flight-sort-tabs/flight-sort-tabs';
+import { StopsFilter } from './components/fliters/stops-filter/stops-filter';
 
 @Component({
   selector: 'app-flight-card-list',
@@ -24,6 +25,7 @@ import { FlightSortTabs } from './components/flight-sort-tabs/flight-sort-tabs';
     FaresView,
     DayViewMiniGrid,
     FlightSortTabs,
+    StopsFilter,
   ],
   providers: [
     provideIcons({
