@@ -86,7 +86,7 @@ export class FlightSearchService {
         'Applicable only for students above 12 years of age. Valid student ID cards and student visas (where applicable) are required to avail this.',
     },
     {
-      id: 'Armed Forces',
+      id: 'armedForces',
       title: 'Armed Forces',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
@@ -102,7 +102,7 @@ export class FlightSearchService {
         'Applicable only for GST-registered businesses. A valid GST number is required to claim GST benefits on the booking.',
     },
     {
-      id: 'Senior Citizen',
+      id: 'Senior',
       title: 'Senior Citizen',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
@@ -110,7 +110,7 @@ export class FlightSearchService {
         'Applicable only for senior citizens above the age of 60 years. A valid proof of Date of Birth is required at the airport to avail this.',
     },
     {
-      id: 'Doctor and Nurses',
+      id: 'Doctor',
       title: 'Doctor and Nurses',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
