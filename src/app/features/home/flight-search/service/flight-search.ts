@@ -1,5 +1,5 @@
 import { computed, Service, signal } from '@angular/core';
-import { AirportType, CabinOption, faresType, TripTypeOption } from '../../model/types';
+import { AirportType, CabinOption, FareFilterCategory, TripTypeOption } from '../../model/types';
 
 @Service()
 export class FlightSearchService {
@@ -69,7 +69,7 @@ export class FlightSearchService {
     },
   ];
 
-  readonly Economyfare = signal<faresType[]>([
+  readonly Economyfare = signal<FareFilterCategory[]>([
     {
       id: 'Regular',
       title: 'Regular',
@@ -86,7 +86,7 @@ export class FlightSearchService {
         'Applicable only for students above 12 years of age. Valid student ID cards and student visas (where applicable) are required to avail this.',
     },
     {
-      id: 'Armed Forces',
+      id: 'armedForces',
       title: 'Armed Forces',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
@@ -102,7 +102,7 @@ export class FlightSearchService {
         'Applicable only for GST-registered businesses. A valid GST number is required to claim GST benefits on the booking.',
     },
     {
-      id: 'Senior Citizen',
+      id: 'Senior',
       title: 'Senior Citizen',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
@@ -110,7 +110,7 @@ export class FlightSearchService {
         'Applicable only for senior citizens above the age of 60 years. A valid proof of Date of Birth is required at the airport to avail this.',
     },
     {
-      id: 'Doctor and Nurses',
+      id: 'Doctor',
       title: 'Doctor and Nurses',
       subtitle: 'Up to USD 6.30 off',
       badge: null,
@@ -266,6 +266,7 @@ export class FlightSearchService {
   totalCount = computed(() => this.adultsCount() + this.childrenCount() + this.infantsCount());
   selectedFare = signal<string>(this.Economyfare()[0].id);
   tripType = signal<TripTypeOption>('one-way');
+  isHidden = signal<boolean>(false);
 
   startDate = signal<Date>(new Date());
   endDate = signal<Date | null>(null);

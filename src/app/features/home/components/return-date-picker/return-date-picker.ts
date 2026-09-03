@@ -26,26 +26,34 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
     }),
   ],
   template: `
-    <div class="w-42.25 h-28.5 min-w-0 relative">
+    <div class="w-full h-full min-w-0 relative flex flex-col justify-start">
       @if (tripType() === 'one-way') {
         <button
           (click)="enableRoundTrip()"
           hlmBtn
           variant="ghost"
           size="lg"
-          class="w-full h-full min-w-0 box-border p-4 text-left justify-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent"
+          class="w-full h-auto min-h-full min-w-0 box-border p-2.5 sm:p-4 text-left justify-start flex-col items-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent overflow-visible whitespace-normal"
         >
           <div class="w-full min-w-0">
-            <div class="flex items-center w-full">
-              <span class="font-light text-slate-500 uppercase tracking-normal"> Return </span>
+            <!-- Fixed Top Header Label -->
+            <div class="flex items-center justify-between sm:justify-start w-full">
+              <span
+                class="font-light text-slate-500 uppercase tracking-normal text-[11px] sm:text-xs block leading-none"
+              >
+                Return
+              </span>
               <ng-icon
                 name="lucideChevronDown"
-                class="text-[16px] shrink-0 ml-3 text-blue-400 [&>svg]:stroke-blue-400"
+                class="text-[14px] sm:text-[16px] shrink-0 ml-1 sm:ml-3 text-blue-400 [&>svg]:stroke-blue-400"
               />
             </div>
 
-            <div class="w-full h-15 border-transparent mt-1">
-              <p class="text-xs text-slate-400 text-wrap py-2 px-1">
+            <!-- Content Slot: Full text visibility -->
+            <div class="w-full min-w-0 mt-1.5 flex items-center">
+              <p
+                class="text-[11px] sm:text-xs text-slate-400 leading-normal wrap-break-word whitespace-normal font-normal"
+              >
                 Tap to add a return date for bigger discounts
               </p>
             </div>
@@ -58,36 +66,46 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
             hlmBtn
             variant="ghost"
             size="lg"
-            class="w-full h-full min-w-0 box-border p-4 text-left justify-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent"
+            class="w-full h-auto min-h-full min-w-0 box-border p-2.5 sm:p-4 text-left justify-start flex-col items-start shadow-none hover:bg-transparent focus:bg-transparent aria-expanded:bg-transparent overflow-visible whitespace-normal"
           >
-            <div class="w-full min-w-0">
-              <div class="flex items-center w-full">
-                <span class="font-light text-slate-500 uppercase tracking-normal"> Return </span>
+            <div class="w-full min-w-0 pr-6 sm:pr-4">
+              <!-- Fixed Top Header Label -->
+              <div class="flex items-center justify-between sm:justify-start w-full">
+                <span
+                  class="font-light text-slate-500 uppercase tracking-normal text-[11px] sm:text-xs block leading-none"
+                >
+                  Return
+                </span>
                 <ng-icon
                   name="lucideChevronDown"
-                  class="text-[16px] shrink-0 ml-3 text-blue-400 [&>svg]:stroke-blue-400"
+                  class="text-[14px] sm:text-[16px] shrink-0 ml-1 sm:ml-3 text-blue-400 [&>svg]:stroke-blue-400"
                 />
               </div>
 
-              <div class="w-full h-15 px-1 border-transparent">
-                <h1 class="text-slate-900 mt-1 flex items-baseline">
-                  <span class="text-3xl font-extrabold tracking-tight">
+              <!-- Content Slot: Date View -->
+              <div class="w-full min-w-0 mt-1 flex flex-col justify-center">
+                <h1 class="text-slate-900 flex items-baseline min-w-0">
+                  <span class="text-2xl sm:text-3xl font-extrabold tracking-tight shrink-0">
                     {{ activeReturnDate().getDate() }}
                   </span>
 
-                  <span class="text-xl font-light ml-1.5">
+                  <span class="text-lg sm:text-xl font-light ml-1.5 truncate">
                     {{ activeReturnDate() | date: "MMM ''yy" }}
                   </span>
                 </h1>
 
-                <p class="text-sm text-slate-500 truncate mt-0.5">
+                <p class="text-xs sm:text-sm text-slate-500 truncate mt-0.5">
                   {{ activeReturnDate() | date: 'EEEE' }}
                 </p>
               </div>
             </div>
           </button>
 
-          <hlm-popover-content class="w-auto p-6 shadow-2xl" *brnPopoverContent="let ctx" appear>
+          <hlm-popover-content
+            class="w-[94vw] sm:w-auto max-w-[calc(100vw-2rem)] p-3 sm:p-6 shadow-2xl rounded-2xl sm:rounded-3xl max-h-[85vh] overflow-y-auto"
+            *brnPopoverContent="let ctx"
+            appear
+          >
             <app-dual-calendar-grid
               mode="range"
               [selectedRange]="dateRange()"
@@ -97,12 +115,17 @@ import { FlightSearchService } from '../../flight-search/service/flight-search';
           </hlm-popover-content>
         </hlm-popover>
 
-        <div
-          class="flex items-center justify-center bg-gray-300 rounded-full w-5 h-5 absolute top-3 right-3 cursor-pointer z-10 hover:bg-gray-400 transition-colors"
+        <button
+          type="button"
+          aria-label="Remove return trip"
+          class="flex items-center justify-center bg-slate-200 hover:bg-slate-300 rounded-full w-6 h-6 sm:w-5 sm:h-5 absolute top-2 right-2 sm:top-3 sm:right-3 cursor-pointer z-10 transition-colors"
           (click)="disableRoundTrip()"
         >
-          <ng-icon name="lucideX" class="text-gray-600 [&>svg]:stroke-gray-600" size="13" />
-        </div>
+          <ng-icon
+            name="lucideX"
+            class="text-slate-600 [&>svg]:stroke-slate-600 text-[11px] sm:text-[13px]"
+          />
+        </button>
       }
     </div>
   `,
@@ -113,7 +136,6 @@ export class ReturnDatePicker {
   readonly startDate = this.flightSearchService.startDate;
   readonly endDate = this.flightSearchService.endDate;
 
-  /** Resolves to endDate if set; defaults safely to startDate */
   readonly activeReturnDate = computed(() => this.endDate() ?? this.startDate());
 
   readonly dateRange = computed<DateRange>(() => ({
@@ -131,7 +153,6 @@ export class ReturnDatePicker {
   enableRoundTrip() {
     this.tripType.set('round-trip');
     if (!this.endDate()) {
-      // Default to same day or next day if no return date was previously picked
       this.endDate.set(
         new Date(new Date(this.startDate()).setDate(new Date(this.startDate()).getDate() + 1)),
       );

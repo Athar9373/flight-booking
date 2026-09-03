@@ -1,1 +1,9 @@
+@if (showLoginModal() && !isLoggedIn()) {
+  <login-model></login-model>
+}
+
+@if (showSignUpModal() && !isLoggedIn()) {
+  <signup-model></signup-model>
+}
+
 <router-outlet></router-outlet>

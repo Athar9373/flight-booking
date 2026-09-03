@@ -1,67 +1,98 @@
-<div class="relative max-w-6xl mx-auto px-4 pt-32 pb-32">
-  <!-- MAIN SEARCH CARD -->
-  <div
-    class="relative bg-white rounded-xl shadow-2xl pt-16 pb-12 px-6 lg:px-5 mt-6"
-    (click)="$event.stopPropagation()"
-  >
-    <app-trip-type></app-trip-type>
+<div
+  class="relative min-h-137.5 w-full overflow-hidden bg-slate-900 pb-12 pt-16 sm:pb-16 sm:pt-20 lg:pt-24"
+>
+  <!-- Mobile Background Color (Visible on mobile only) -->
+  <div class="absolute inset-0 h-full w-full bg-blue-950 sm:hidden"></div>
 
+  <!-- Desktop Background Image (Visible on sm screens and up) -->
+  <img
+    src="/bg1.png"
+    alt="Background"
+    class="absolute inset-0 h-full w-full object-cover object-center hidden sm:block"
+  />
+
+  <!-- Dark Overlay (Active on sm screens and up to match the desktop image) -->
+  <div class="absolute inset-0 hidden bg-black/45 sm:block"></div>
+  <!-- Container -->
+  <div class="relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+    <!-- MAIN SEARCH CARD -->
     <div
-      class="flex grow-0 border border-slate-300 rounded-2xl mt-6 divide-y lg:divide-y-0 lg:divide-x divide-slate-300 relative"
+      class="relative mt-10 sm:mt-8 rounded-2xl bg-white p-4 sm:p-6 lg:p-8 shadow-2xl"
+      (click)="$event.stopPropagation()"
     >
+      <!-- Trip Type Selection -->
+      <app-trip-type></app-trip-type>
+
+      <!-- Search Control Bar (Flex Container for Desktop Alignment) -->
       <div
-        class="w-99 grid grid-cols-2 border-r border-slate-300 divide-y lg:divide-y-0 lg:divide-x divide-slate-300 relative"
+        class="relative mt-4 sm:mt-6 flex flex-col divide-y divide-slate-200 rounded-2xl border border-slate-300 lg:flex-row lg:divide-x lg:divide-y-0"
       >
-        <!-- FROM -->
-        <city-popover
-          [city]="fromCity()"
-          label="FROM"
-          (cityChange)="onFromCityChange($event)"
-          class="w-full pr-1 hover:bg-blue-100/70 transition-colors duration-75"
-        />
-
-        <!-- SWAP -->
-        <button
-          type="button"
-          (click)="swapCities()"
-          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:flex w-7 h-7 bg-white border rounded-full shadow-md border-slate-200 items-center justify-center text-blue-600 hover:bg-slate-100 cursor-pointer"
-          aria-label="Swap departure and destination"
+        <!-- FROM & TO CONTAINER -->
+        <div
+          class="relative flex flex-col divide-y divide-slate-200 sm:flex-row sm:divide-x sm:divide-y-0 lg:w-[42%] min-w-0"
         >
-          <ng-icon name="lucideArrowLeftRight" size="14" />
-        </button>
+          <!-- FROM CITY -->
+          <city-popover
+            [city]="fromCity()"
+            label="FROM"
+            (cityChange)="onFromCityChange($event)"
+            class="block w-full sm:w-1/2 transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+          />
 
-        <!-- TO -->
-        <city-popover
-          [city]="toCity()"
-          label="TO"
-          (cityChange)="onToCityChange($event)"
-          class="w-full pl-2 hover:bg-blue-100/70 transition-colors duration-75"
-        />
+          <!-- SWAP BUTTON -->
+          <button
+            type="button"
+            (click)="swapCities()"
+            class="absolute left-1/2 top-1/2 z-20 flex h-7 w-7 sm:h-8 sm:w-8 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-white text-blue-600 shadow-md transition-transform hover:bg-slate-100 hover:scale-110"
+            aria-label="Swap departure and destination"
+          >
+            <ng-icon name="lucideArrowLeftRight" size="14" class="rotate-90 sm:rotate-0" />
+          </button>
+
+          <!-- TO CITY -->
+          <city-popover
+            [city]="toCity()"
+            label="TO"
+            (cityChange)="onToCityChange($event)"
+            class="block w-full sm:w-1/2 transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+          />
+        </div>
+
+        <!-- DEPARTURE DATE -->
+        <depature-date-picker
+          class="block w-full lg:w-[15%] transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+        ></depature-date-picker>
+
+        <!-- RETURN DATE -->
+        <return-date-picker
+          class="block w-full lg:w-[15%] transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+        ></return-date-picker>
+
+        <!-- TRAVELLERS -->
+        <app-travellers
+          class="block w-full lg:w-[13%] transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+        ></app-travellers>
+
+        <!-- CABIN CLASS -->
+        <app-cabin-class-popover
+          class="block w-full lg:w-[15%] transition-colors duration-75 hover:bg-blue-50/70 min-w-0"
+        ></app-cabin-class-popover>
       </div>
-      <depature-date-picker
-        class="hover:bg-blue-100/70 transition-colors duration-75 px-4"
-      ></depature-date-picker>
-      <return-date-picker
-        class="hover:bg-blue-100/70 transition-colors duration-75 w-43.25!"
-      ></return-date-picker>
-      <app-travellers
-        class="hover:bg-blue-100/70 transition-colors duration-75 px-4"
-      ></app-travellers>
-      <app-cabin-class-popover
-        class="w-45 hover:bg-blue-100/70 transition-colors duration-75"
-      ></app-cabin-class-popover>
-    </div>
-    <app-special-fares></app-special-fares>
 
-    <div
-      class="absolute -bottom-8 left-1/2 -translate-x-1/2 z-30 shadow-lg px-4 py-1.5 flex items-center gap-6 whitespace-nowrap"
-    >
-      <button
-        (click)="onSearch()"
-        class="bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-black text-xl px-20 py-2 rounded-full shadow-xl tracking-wider cursor-pointer transition-all transform hover:scale-105"
-      >
-        SEARCH
-      </button>
+      <!-- SPECIAL FARES -->
+      <div class="mt-4 sm:mt-6 pb-6 lg:pb-4">
+        <app-special-fares></app-special-fares>
+      </div>
+
+      <!-- FLOATING SEARCH BUTTON -->
+      <div class="absolute -bottom-6 left-1/2 z-30 -translate-x-1/2 whitespace-nowrap">
+        <button
+          (click)="onSearch()"
+          class="cursor-pointer rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-10 py-2.5 text-base sm:px-16 sm:py-3 sm:text-xl font-black tracking-wider text-white shadow-xl transition-all hover:scale-105 hover:from-blue-600 hover:to-blue-700 active:scale-95"
+        >
+          SEARCH
+        </button>
+      </div>
     </div>
   </div>
 </div>

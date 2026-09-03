@@ -1,13 +1,3 @@
-<div class="relative w-screen h-200">
-  <!-- Background Image -->
-  <img
-    src="/bg1.png"
-    alt="Background"
-    class="absolute inset-0 w-full h-full object-cover object-center"
-  />
-
-  <!-- Dark Overlay -->
-  <div class="absolute inset-0 bg-black/40"></div>
-  <app-navbar [isHidden]="isHidden()"></app-navbar>
-  < <app-flight-search></app-flight-search>
-</div>
+<app-navbar></app-navbar>
+<app-flight-search></app-flight-search>
+<app-flight-card-list />

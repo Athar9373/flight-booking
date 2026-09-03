@@ -18,6 +18,7 @@ export interface AirportType {
 
 @Component({
   selector: 'city-popover',
+  standalone: true,
   imports: [
     BrnPopoverImports,
     HlmPopoverImports,
@@ -34,6 +35,7 @@ export interface AirportType {
   template: `
     <hlm-popover
       sideOffset="5"
+      class="w-full h-full"
       [state]="popoverState()"
       (stateChanged)="onPopoverStateChange($event)"
     >
@@ -48,34 +50,38 @@ export interface AirportType {
                aria-expanded:bg-transparent
                data-[state=open]:bg-transparent"
       >
-        <div class="p-4 rounded-l-2xl cursor-pointer min-w-0">
-          <span class="font-light text-slate-500 uppercase tracking-normal block">
+        <div class="p-2.5 sm:p-4 rounded-l-2xl cursor-pointer min-w-0 w-full">
+          <span
+            class="font-light text-slate-500 uppercase tracking-normal text-[11px] sm:text-xs block"
+          >
             {{ label() }}
           </span>
 
-          <h1 class="text-2xl font-extrabold text-slate-900 mt-1 overflow-hidden mr-2">
+          <h1
+            class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-0.5 sm:mt-1 truncate mr-2"
+          >
             {{ city()?.name }}
           </h1>
 
-          <p class="text-[14px] text-slate-500 truncate mt-0.5">
+          <p class="text-xs sm:text-[14px] text-slate-500 truncate mt-0.5">
             {{ city()?.airport }}
           </p>
         </div>
       </button>
 
-      <!-- Popover -->
+      <!-- Popover Content -->
       <hlm-popover-content
-        class="min-w-90 shadow-3xl h-100 p-5! rounded-2xl!"
+        class="w-[94vw] sm:w-104 max-w-md p-3.5 sm:p-5 shadow-3xl rounded-2xl sm:max-h-[80vh] max-h-[40vh] flex flex-col"
         *brnPopoverContent="let ctx"
         appear
       >
-        <!-- Search -->
-        <hlm-input-group class="h-10!">
+        <!-- Search Input -->
+        <hlm-input-group class="h-10! shrink-0 mb-3">
           <input
             hlmInputGroupInput
             [placeholder]="'Search ' + label()"
             [(ngModel)]="citySearchQuery"
-            class="placeholder:font-bold focus:outline-none"
+            class="placeholder:font-bold focus:outline-none text-xs sm:text-sm"
           />
 
           <hlm-input-group-addon>
@@ -83,40 +89,44 @@ export interface AirportType {
           </hlm-input-group-addon>
         </hlm-input-group>
 
-        <!-- Airports -->
+        <!-- Airports Scroll Container -->
         <div
-          class="h-100 overflow-y-auto space-y-1
+          class="flex-1 overflow-y-auto space-y-1 max-h-[calc(80vh-5rem)]
                  scrollbar-none
                  [-ms-overflow-style:none]
                  [&::-webkit-scrollbar]:hidden"
         >
           @if (!citySearchQuery()) {
-            <h2 class="tracking-tighter font-bold text-muted-foreground">POPULAR SEARCHES</h2>
+            <h2
+              class="tracking-tighter font-bold text-muted-foreground text-[11px] sm:text-xs mb-1 px-1"
+            >
+              POPULAR SEARCHES
+            </h2>
 
             @for (airport of airports; track airport.code) {
               <button
                 type="button"
-                class="flex items-center justify-between p-2.5
-                       hover:bg-gray-100 rounded-md cursor-pointer
+                class="flex items-center justify-between p-2 sm:p-2.5
+                       hover:bg-slate-100 rounded-md cursor-pointer
                        transition-colors w-full text-left"
                 (click)="selectCity(airport)"
               >
-                <div class="flex items-center gap-3 w-full">
+                <div class="flex items-center gap-2.5 sm:gap-3 w-full min-w-0">
                   <span
-                    class="bg-gray-300/70 text-gray-700 font-medium
+                    class="bg-slate-200/80 text-slate-700 font-medium
                            text-xs px-2 py-1.5 rounded-md shrink-0
                            flex items-center justify-center
-                           w-11 h-11"
+                           w-9 h-9 sm:w-11 sm:h-11"
                   >
                     {{ airport.code }}
                   </span>
 
-                  <div class="min-w-0">
-                    <p class="text-sm font-light text-slate-900 truncate">
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs sm:text-sm font-light text-slate-900 truncate">
                       {{ airport.name }}
                     </p>
 
-                    <p class="text-xs text-slate-500 truncate">
+                    <p class="text-[11px] sm:text-xs text-slate-500 truncate">
                       {{ airport.airport }}
                     </p>
                   </div>
@@ -124,39 +134,43 @@ export interface AirportType {
               </button>
             }
           } @else {
-            <h2 class="tracking-tighter font-bold text-muted-foreground">SUGGESTIONS</h2>
+            <h2
+              class="tracking-tighter font-bold text-muted-foreground text-[11px] sm:text-xs mb-1 px-1"
+            >
+              SUGGESTIONS
+            </h2>
 
             @for (airport of filteredAirports(); track airport.code) {
               <button
                 type="button"
-                class="flex items-center justify-between p-2.5
-                       hover:bg-gray-100 rounded-md cursor-pointer
+                class="flex items-center justify-between p-2 sm:p-2.5
+                       hover:bg-slate-100 rounded-md cursor-pointer
                        transition-colors w-full text-left"
                 (click)="selectCity(airport)"
               >
-                <div class="flex items-center gap-3 w-full">
+                <div class="flex items-center gap-2.5 sm:gap-3 w-full min-w-0">
                   <span
-                    class="bg-gray-300/70 text-gray-700 font-medium
+                    class="bg-slate-200/80 text-slate-700 font-medium
                            text-xs px-2 py-1.5 rounded-md shrink-0
                            flex items-center justify-center
-                           w-11 h-11"
+                           w-9 h-9 sm:w-11 sm:h-11"
                   >
                     {{ airport.code }}
                   </span>
 
-                  <div class="min-w-0">
-                    <p class="text-sm font-light text-slate-900 truncate">
+                  <div class="min-w-0 flex-1">
+                    <p class="text-xs sm:text-sm font-light text-slate-900 truncate">
                       {{ airport.name }}
                     </p>
 
-                    <p class="text-xs text-slate-500 truncate">
+                    <p class="text-[11px] sm:text-xs text-slate-500 truncate">
                       {{ airport.airport }}
                     </p>
                   </div>
                 </div>
               </button>
             } @empty {
-              <p class="text-center text-xs text-slate-400 py-4">
+              <p class="text-center text-xs text-slate-400 py-6">
                 No airports found matching "{{ citySearchQuery() }}"
               </p>
             }
